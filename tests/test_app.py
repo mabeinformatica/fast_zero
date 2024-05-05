@@ -1,13 +1,7 @@
 from http import HTTPStatus
 
-from fastapi.testclient import TestClient
 
-from fast_zero import app
-
-
-def test_create_user():
-    client = TestClient(app)
-
+def test_create_user(client):
     response = client.post(
         '/users/',
         json={
@@ -26,9 +20,7 @@ def test_create_user():
     }
 
 
-def test_read_users():
-    client = TestClient(app)
-
+def test_read_users(client):
     response = client.get('/users/')
 
     assert response.status_code == HTTPStatus.OK
@@ -44,9 +36,7 @@ def test_read_users():
     }
 
 
-def test_update_user():
-    client = TestClient(app)
-
+def test_update_user(client):
     response = client.put(
         '/users/1',
         json={
@@ -65,9 +55,7 @@ def test_update_user():
     }
 
 
-def test_delete_user():
-    client = TestClient(app)
-
+def test_delete_user(client):
     response = client.delete('/users/1')
 
     assert response.status_code == HTTPStatus.OK
