@@ -12,7 +12,7 @@ class User:
     __tablename__ = 'users'
 
     id: Mapped[int] = mapped_column(init=False, primary_key=True)
-    email: Mapped[str] = mapped_column(unique=True)
+    email: Mapped[str] = mapped_column(String(150))
     name: Mapped[str] = mapped_column(String(100))
     password: Mapped[str]
     avatar: Mapped[Optional[str]] = mapped_column(nullable=True)
@@ -20,6 +20,4 @@ class User:
     created_at: Mapped[datetime] = mapped_column(
         init=False, server_default=func.now()
     )
-    updated_at: Mapped[datetime] = mapped_column(
-        init=False, onupdate=func.now()
-    )
+    updated_at: Mapped[datetime] = mapped_column(server_onupdate=func.now())
