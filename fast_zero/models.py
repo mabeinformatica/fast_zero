@@ -1,6 +1,7 @@
 from datetime import datetime
+from typing import Optional
 
-from sqlalchemy import func
+from sqlalchemy import String, func
 from sqlalchemy.orm import Mapped, mapped_column, registry
 
 table_registry = registry()
@@ -12,9 +13,9 @@ class User:
 
     id: Mapped[int] = mapped_column(init=False, primary_key=True)
     email: Mapped[str] = mapped_column(unique=True)
-    name: Mapped[str]
+    name: Mapped[str] = mapped_column(String(100))
     password: Mapped[str]
-    avatar: Mapped[str] = mapped_column(init=True, nullable=True)
+    avatar: Mapped[Optional[str]] = mapped_column(nullable=True)
     role: Mapped[int]
     created_at: Mapped[datetime] = mapped_column(
         init=False, server_default=func.now()
@@ -22,4 +23,3 @@ class User:
     updated_at: Mapped[datetime] = mapped_column(
         init=False, onupdate=func.now()
     )
-    updated_at: Mapped[datetime]
