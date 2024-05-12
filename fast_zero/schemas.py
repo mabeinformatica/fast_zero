@@ -3,6 +3,10 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, EmailStr
 
 
+class Message(BaseModel):
+    message: str
+
+
 class UserSchema(BaseModel):
     name: str
     email: EmailStr

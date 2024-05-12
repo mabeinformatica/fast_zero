@@ -25,10 +25,10 @@ def client(session):
 
 @pytest.fixture()
 def session():
-    # engine = create_engine('sqlite:///:memory:')
-    engine = create_engine(
-        'mssql+pymssql://sa:2xeZGam9j9ez4YxEOFMryw@localhost:1433/x3v12db?charset=utf8'
-    )
+    engine = create_engine('sqlite:///:memory:')
+    # engine = create_engine(
+    #    'mssql+pymssql://sa:2xeZGam9j9ez4YxEOFMryw@localhost:1433/x3v12db?charset=utf8'
+    # )
 
     table_registry.metadata.create_all(engine)
 
@@ -60,7 +60,7 @@ def user(session):
 @pytest.fixture()
 def token(client, user):
     response = client.post(
-        '/token',
+        'auth/token',
         data={'username': user.email, 'password': user.clean_password},
     )
 
